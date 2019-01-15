@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - DemoApplication",
+            "request": "launch",
+            "mainClass": "com.example.webdevsp19serverjava.DemoApplication",
+            "projectName": "webdev-sp19-server-java"
+        }
+    ]
+}
