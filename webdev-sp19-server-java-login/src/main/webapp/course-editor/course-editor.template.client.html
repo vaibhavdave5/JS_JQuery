@@ -1,47 +1,127 @@
 <html>
 <head>
 <title>Course Editor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="container-fluid">
-    <h1>Course Editor</h1>
-    <div class="row">
-      <div class="col-2">
-        <ul class="nav flex-column nav-pills">
-          <a class="nav-link active" href="#">Module 1</a>
-          <a class="nav-link" href="#">Module 2</a>
-          <a class="nav-link" href="#">Module 3</a>
-          <a class="nav-link" href="#">Module 4</a>
-        </ul>
-      </div>
-      <div class="col-10">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Lesson 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lesson 2</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Lesson 3</a>
-          </li>
-        </ul>
-        <br />
-        <ul class="nav nav-pills">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Topic 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Topic 2</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Topic 3</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
+
+
+	<div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand" href="#">CS5610 WEB DEV</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarColor01" aria-controls="navbarColor01"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link" href="#">Built
+							<span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Pages</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">App</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Store</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Settings</a></li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">+</button>
+				</form>
+			</div>
+		</nav>
+	</div>
+
+	<div class="row">
+		<div class="col-2"
+			style="background-color: black; padding-top: 1vw; height: 100%">
+			<ul class="nav flex-column nav-pills">
+				<div class="nav-link alert alert-dismissible alert-info">
+					<button type="button" class="close " data-dismiss="alert">&times;</button>
+					<a href="#" class="alert-link">Module 1</a>.
+				</div>
+				<div class="nav-link alert alert-dismissible alert-info">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<a href="#" class="alert-link">Module 2</a>.
+				</div>
+				<div class="nav-link alert alert-dismissible alert-info">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<a href="#" class="alert-link">Module 3</a>.
+				</div>
+				<div class="nav-link alert alert-dismissible alert-info">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<a href="#" class="alert-link">Module 4</a>.
+				</div>
+				<div class="row">
+					<div class="col-md-8"></div>
+
+					<div class="col-md-4 float-right">
+						<button>+</button>
+					</div>
+				</div>
+			</ul>
+		</div>
+		<div class="col-10">
+			<div class="row">
+				<ul class="nav nav-pills" style="padding: 1vw">
+					<li class="nav-item" style="padding: 1vw"><a
+						class="nav-link active" href="#">Topic 1</a></li>
+					<li class="nav-item" style="padding: 1vw"><a
+						class="nav-link btn btn-light" href="#">Topic 2</a></li>
+					<li class="nav-item" style="padding: 1vw"><a
+						class="nav-link btn btn-light" href="#">Topic 3</a></li>
+					<li class="nav-item" style="padding: 1vw"><a
+						class="nav-link btn btn-light" href="#">+</a></li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class=col-8></div>
+				<div class=col-4>
+					<button type="button" class="btn btn-success" data-toggle="button"
+						autocomplete="off">Save</button>
+					<button type="button" class="btn btn-primary" data-toggle="button"
+						aria-pressed="false" autocomplete="off">Preview</button>
+				</div>
+			</div>
+			<br />
+
+			<div class="row">
+				<div class="col-1"></div>
+				<div class="col-10"
+					style="border-style: outset ; border-bottom-color: black;">
+					<div class="row">
+						<h2>Heading Widget</h2>
+					</div>
+					<div class="row">
+						<div class = "col-12">
+						<div class="form-group">
+							<input type="text" class="form-control" id="exampleInputHeading"
+								aria-describedby="emailHelp" placeholder="Enter Heading">
+						</div>
+						<div class="form-group">
+							<select class="custom-select">
+								<option>Heading 1</option>
+								<option>Heading 2</option>
+								<option>Heading 3</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="exampleInputWidgetName"
+								aria-describedby="emailHelp" placeholder="Enter Widget Name">
+						</div>
+						
+						<h3>Preview</h3>
+						<h1>Enter Heading</h1>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 </body>
 </html>
