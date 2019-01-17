@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+
+.row-margin { 
+  margin-top: 1vw;
+}
+
+.sidebar {
+	background-color: black; 
+    padding-top: 1vw; 
+    height: 100%
+}
+
+.navpad{
+	padding: 1vw;
+}
+
+.rowpad{
+	padding: 1vw;
+}
+
+.editor-border{
+	border-style: outset; 
+	border-bottom-color: black;
+}
+
+.f-icons{
+	font-size: 24px;
+}
+
+.type-widget{
+	width: 9vw;
+}
+
+.img-widget{
+	width:104px;
+	height:142px;
+}
