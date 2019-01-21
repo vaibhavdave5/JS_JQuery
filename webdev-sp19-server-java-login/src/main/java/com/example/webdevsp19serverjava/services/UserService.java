@@ -2,8 +2,11 @@ package com.example.webdevsp19serverjava.services;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsp19serverjava.model.User;
@@ -38,12 +41,15 @@ public class UserService {
 		}
 		return null;
 	}
-	public User createUser(User user) {
+	
+	@PostMapping(path = "/api/user/createUser", consumes = "application/json", produces = "application/json")
+	public User createUser(@RequestBody User user) {
 		users.add(user);
 		return user;
 	}
 	
-	public void deleteUser(Integer id) {
+	@DeleteMapping("/api/user/deleteUser")
+	public void deleteUser(@RequestBody Integer id) {
 		for(User user: users) {
 			if(id.equals(user.getId()))
 				users.remove(user);

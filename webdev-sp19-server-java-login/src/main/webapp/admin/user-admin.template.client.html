@@ -52,27 +52,24 @@
 			  <td><span class="float-right" 
 			            style="white-space: nowrap">
 			      <i class="fa-2x fa fa-search wbdv-search"></i> 
-			      <i class="fa-2x fa fa-plus wbdv-create"></i> 
+			      <button id="createBtn"><i class="fa-2x fa fa-plus wbdv-create"></i></button> 
 			      <i class="fa-2x fa fa-check wbdv-update"></i>
 			  </span>
 			  </td>
 			</tr>
-			  
-			
-			
-			
-			
-			
-			<tr>
 
-				<td><a href="/course-editor/course-editor.template.client.html">
-				<p><i class="fas fa-graduation-cap"></i> CS5500 Software Engineering</p></a></td>
-				<td class="d-none d-sm-table-cell">me</td>
-				<td class="d-none d-sm-table-cell">May, 20</td>
-				<td><button type="button" 
-							class="close" 
-							data-dismiss="alert">&times;</button></td>
-			</tr>
+
+			<tr class="wbdv-template">
+		        <td class="username"></td>
+		        <td>****</td>
+		        <td class="firstName"></td>
+		        <td class="lastName"></td>
+		        <td>Faculty</td>
+		        <td>11/22/1968</td>
+		        <td><button id="removeBtn" class="btn btn-danger">Delete</button>
+		          <button class="btn btn-info">Edit</button></td>
+      		</tr>
+			
 
 		</tbody>
 	</table>
