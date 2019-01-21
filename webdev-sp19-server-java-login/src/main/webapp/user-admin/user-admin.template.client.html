@@ -1,0 +1,82 @@
+<html>
+<head>
+<title>Course List</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+	<title>User Admin</title>
+	<link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href= "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link href="user-admin.style.client.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="../services/user.service.client.js"></script>
+	<script src="user-admin.component.client.js"></script>
+	</head>
+<body>
+
+	<!-- Table head -->
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">Username</th>
+				<th scope="col">Password</th>
+				<th scope="col">First Name</th>
+				<th scope="col">Last Name</th>
+				<th scope="col">Role</th>
+				<th scope="col">&nbsp;</th>	
+			</tr>
+		</thead>
+		
+		<!-- Table body -->
+		<tbody>
+			
+			<tr class="wbdv-form">
+			  <td><input id="usernameFld" 
+			             class="form-control"
+			             placeholder="Username" /></td>
+			  <td><input id="passwordFld" 
+			             class="form-control"
+			             placeholder="Password" /></td>
+			  <td><input id="firstNameFld" 
+			             class="form-control"
+			             placeholder="First Name" /></td>
+			  <td><input id="lastNameFld" 
+			             class="form-control"
+			             placeholder="Last Name" /></td>
+			  <td><select id="roleFld" 
+			              class="form-control">
+			      <option value="FACULTY">Faculty</option>
+			      <option value="STUDENT">Student</option>
+			      <option value="ADMIN">Admin</option>
+			  </select>
+			  </td>
+			  <td><span class="float-right" 
+			            style="white-space: nowrap">
+			      <i class="fa-2x fa fa-search wbdv-search"></i> 
+			      <i class="fa-2x fa fa-plus wbdv-create"></i> 
+			      <i class="fa-2x fa fa-check wbdv-update"></i>
+			  </span>
+			  </td>
+			</tr>
+			  
+			
+			
+			
+			
+			
+			<tr>
+
+				<td><a href="/course-editor/course-editor.template.client.html">
+				<p><i class="fas fa-graduation-cap"></i> CS5500 Software Engineering</p></a></td>
+				<td class="d-none d-sm-table-cell">me</td>
+				<td class="d-none d-sm-table-cell">May, 20</td>
+				<td><button type="button" 
+							class="close" 
+							data-dismiss="alert">&times;</button></td>
+			</tr>
+
+		</tbody>
+	</table>
+
+
+</body>
+</html>
