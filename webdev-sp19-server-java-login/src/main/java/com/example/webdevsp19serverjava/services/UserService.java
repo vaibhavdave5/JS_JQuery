@@ -69,6 +69,7 @@ public class UserService {
 	public User updateUser(@RequestParam Integer id, @RequestBody User user) {
 		for(int  i=0 ; i <users.size(); ++i) {
 			if(users.get(i).getId().equals(id)) {
+				users.remove(i);
 				users.add(i, user);
 				return users.get(i);
 			}
