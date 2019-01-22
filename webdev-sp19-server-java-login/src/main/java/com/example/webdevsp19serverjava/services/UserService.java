@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webdevsp19serverjava.model.User;
@@ -48,16 +51,22 @@ public class UserService {
 		return user;
 	}
 	
-	@DeleteMapping("/api/user/deleteUser")
-	public void deleteUser(@RequestBody Integer id) {
+	@DeleteMapping(path = "/api/user/deleteUser")
+	@ResponseBody
+	public void deleteUser(@RequestParam("id") Integer id) {
 		for(User user: users) {
-			if(id.equals(user.getId()))
+			if(user.getId().equals(id)) {
 				users.remove(user);
 				return;
+		 }
 		}
+		
 	}
 	
-	public User updateUser(Integer id, User user) {
+	
+	@PutMapping(path = "/api/user/updateUser")
+	@ResponseBody
+	public User updateUser(@RequestParam Integer id, @RequestBody User user) {
 		for(int  i=0 ; i <users.size(); ++i) {
 			if(users.get(i).getId().equals(id)) {
 				users.add(i, user);
