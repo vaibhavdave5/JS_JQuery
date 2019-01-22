@@ -4,6 +4,7 @@
     var $firstNameFld, $lastNameFld;
     var $userRowTemplate, $tbody;
     var userService = new AdminUserServiceClient();
+    var $hiddenRow;
     $(main);
 
     function main() {
@@ -13,15 +14,20 @@
         $roleFld = $("#roleFld");
         $createBtn = $("#createBtn");
         $createBtn.click(createUser);
-        
+
         $userRowTemplate = $(".wbdv-template");
         $tbody = $("tbody");
         
+        $userRowTemplate.hide();
+
         $usernameFld.val("alice");
+
         
         userService
             .findAllUsers()
             .then(renderUsers);
+
+      
     }
     function createUser() { 
     	var user =
@@ -66,6 +72,7 @@
         for(var u=0; u<users.length; u++) {
             console.log(users[u]);
             var clone = $userRowTemplate.clone();
+            clone.show();
             clone.find(".username").html(users[u].username);
             clone.find(".firstName").html(users[u].firstName);
             $tbody.append(clone);
