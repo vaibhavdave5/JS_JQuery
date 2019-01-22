@@ -41,10 +41,18 @@
     function findAllUsers() {
         return userService.findAllUsers();
     }
-    function findUserById() {  }
-    function deleteUser() {  }
-    function selectUser() {  }
-    function updateUser() {  }
+    function findUserById() { 
+    	
+    }
+    function deleteUser() { 
+    	
+    }
+    function selectUser() { 
+    	
+    }
+    function updateUser() {
+    	
+    }
     
     function renderUser(user) { 
         var clone = $userRowTemplate.clone();

@@ -11,6 +11,10 @@ function AdminUserServiceClient() {
     this.url = 'http://localhost:8080/api/user';
     var self = this;
     
+    
+    /**
+     * 
+     */
     function createUser(user, callback) {
         
         const promise = new Promise((resolve, reject) => {
@@ -41,27 +45,12 @@ function AdminUserServiceClient() {
       
 
        return promise;
-       
-       
-        
-        // var settings = {
-    	// 	"async": true,
-    	//     "crossDomain": true,
-    	//     "url": "http://localhost:8080/api/user/createUser",
-    	// 	"method": "POST",
-    	// 	"headers": {
-    	// 		"Content-Type": "application/json",
-    	// 		"cache-control": "no-cache",
-    	// 		"Postman-Token": "10f4c357-38c5-4150-8255-f42a6b16be3b"
-    	// 	 },
-    	// 	 "processData": false,
-    	// 		 "data": "{\n        \"id\": 123,\n        \"username\": \"alice\",\n        \"password\": null,\n        \"firstName\": \"Alice\",\n        \"lastName\": \"Wonderland\"\n}"
-        //     }
 
-    	// 	$.ajax(settings).done(function (response) {
-        //         return Promise.resolve(response);
-        //      });
     }
+    
+    /*
+     * 
+     */
     
     function findAllUsers(callback) {
     	return fetch(this.url)
@@ -69,7 +58,95 @@ function AdminUserServiceClient() {
             return response.json();
         });
     }
-    function findUserById(userId, callback) { }
-    function updateUser(userId, user, callback) {  }
-    function deleteUser(userId, callback) {  }
+    
+    /*
+     * 
+     */
+    
+    function findUserById(userId, callback) {
+
+    	const promise = new Promise((resolve, reject) => {
+        	var data = JSON.stringify(false);
+
+      		var xhr = new XMLHttpRequest();
+      		xhr.withCredentials = true;
+
+      		xhr.addEventListener("readystatechange", function () {
+      		  if (this.readyState === 4) {
+      			resolve(JSON.parse(this.responseText));
+      		  }
+      		});
+
+      		xhr.open("GET", "http://localhost:8080/api/user/234");
+      		xhr.setRequestHeader("Content-Type", "application/json");
+      		xhr.setRequestHeader("cache-control", "no-cache");
+      		xhr.setRequestHeader("Postman-Token", "d4cfa94a-6962-4c4c-a413-482821f4622b");
+
+      		xhr.send(data)    	
+    	
+    	});
+    	
+    	return promise;
+    }
+    
+    /*
+     * 
+     */
+    function updateUser(userId, user, callback) {
+    	
+    	const promise = new Promise((resolve, reject) => {
+    	var data = JSON.stringify({
+    		  "id": 234,
+    		  "username": "bobi",
+    		  "password": null,
+    		  "firstName": "Bob",
+    		  "lastName": "Marley"
+    		});
+
+    		var xhr = new XMLHttpRequest();
+    		xhr.withCredentials = true;
+
+    		xhr.addEventListener("readystatechange", function () {
+    		  if (this.readyState === 4) {
+        			resolve(JSON.parse(this.responseText));
+    		  }
+    		});
+
+    		xhr.open("PUT", "http://localhost:8080/api/user/updateUser?id=234");
+    		xhr.setRequestHeader("Content-Type", "application/json");
+    		xhr.setRequestHeader("cache-control", "no-cache");
+    		xhr.setRequestHeader("Postman-Token", "52eb2f5a-e5e2-4083-a253-b09fd34bf42a");
+
+    		xhr.send(data);
+    	});
+    	return promise;
+    }
+    
+    /*
+     * 
+     */
+    	
+    function deleteUser(userId, callback) {
+    	
+    const promise = new Promise((resolve, reject) => {
+    	var data = JSON.stringify(false);
+
+    	var xhr = new XMLHttpRequest();
+    	xhr.withCredentials = true;
+
+    	xhr.addEventListener("readystatechange", function () {
+    	  if (this.readyState === 4) {
+    	    console.log(this.responseText);
+    	  }
+    	});
+
+    	xhr.open("DELETE", "http://localhost:8080/api/user/deleteUser?id=123");
+    	xhr.setRequestHeader("Content-Type", "application/json");
+    	xhr.setRequestHeader("cache-control", "no-cache");
+    	xhr.setRequestHeader("Postman-Token", "84c27046-38f6-466d-9b6d-68348732c29d");
+
+    	xhr.send(data);
+    });
+    return promise;
+    }
 }
