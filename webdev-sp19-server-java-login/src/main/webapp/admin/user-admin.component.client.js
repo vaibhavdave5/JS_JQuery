@@ -46,7 +46,10 @@
 
     function createUser() { 
             
-            if(!$usernameFld || !$passwordFld || !$firstNameFld || !$lastNameFld){
+            if(!$usernameFld.val() ||
+                !$passwordFld.val() || 
+                !$firstNameFld.val() ||
+                !$lastNameFld.val()){
                 alert("All fields must be filled");
             }
         
@@ -54,13 +57,13 @@
                 var user =
                 {
                     id: null,
-                    username: $usernameFld, 
-                    password: $passwordFld,
-                    firstName: $firstNameFld,
-                    lastName: $lastNameFld,
-                    role: $roleFld 
+                    username: $usernameFld.val()+"", 
+                    password: $passwordFld.val()+"",
+                    firstName: $firstNameFld.val()+"",
+                    lastName: $lastNameFld.val()+"",
+                    role: $roleFld.val()+"" 
                 };
-
+                
                 userService
                     .createUser(user)
                     .then(renderUser);
@@ -80,12 +83,12 @@
         
         var r = confirm("Are you sure?");
         if (r == true) {
+            console.log(delButton.attr('deleteID'));
             userService.deleteUser(delButton.attr('deleteID'))
             .then(function(){
                 delRow.remove();
             });    
         } 
-        
     }
 
     function selectUser() { 
@@ -98,7 +101,7 @@
         var lnfld = userRowEdit.find("#lastNameFld").val();
         var pfld = userRowEdit.find("#passwordFld").val();
         var user = {
-            id: 123,
+            id: null,
             username: ufld, 
             password: fnfld,
             firstName: lnfld,
@@ -124,7 +127,7 @@
 
     function updateUser() {
         if($editing === true){
-            alert("Cannot edit two elements at one time");
+            alert("Cannot edit two elements at one time \n Press Cancel button");
         }
 
         else {
@@ -134,12 +137,15 @@
         var firstname = editRow.find(".firstName").html();
         var lastname = editRow.find(".lastName").html();
         var password = editRow.find(".password").html();
-                
+        var role = editRow.find(".role").html();
+
+
         var userRowEdit = $(".wbdv-form");
         userRowEdit.find("#usernameFld").val(username);
         userRowEdit.find("#firstNameFld").val(firstname);
         userRowEdit.find("#lastNameFld").val(lastname);
         userRowEdit.find("#passwordFld").val(password);
+        userRowEdit.find("#role").val(role);
         editRow.attr("bgcolor", "#FF0000");
 
         var user;
@@ -185,8 +191,13 @@
         for(var u=0; u<users.length; u++) {
             var clone = $userRowTemplate.clone();
             clone.show();
+            
             clone.find(".username").html(users[u].username);
             clone.find(".firstName").html(users[u].firstName);
+            clone.find(".lastName").html(users[u].lastName);
+            clone.find(".password").html('********');
+            clone.find(".date").html(new Date(users[u].id).toLocaleDateString());
+            clone.find(".role").html(users[u].role);
             clone.find("#removeBtn").click(deleteUser);
             clone.find("#removeBtn").attr("deleteID", users[u].id+"");
             clone.find("#editBtn").click(updateUser);

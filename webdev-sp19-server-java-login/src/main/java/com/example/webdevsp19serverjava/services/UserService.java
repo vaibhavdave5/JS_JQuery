@@ -18,13 +18,11 @@ import java.util.*;
 
 @RestController
 public class UserService {
-	User alice = new User(123, "alice", "Alice", "Wonderland");
-	User bob = new User(234, "bob", "Bob", "Marley");
+	User alice = new User(new Date().getTime(), "alice", "Alice", "Wonderland", "Student");
 	List<User> users = new ArrayList<>();
 
 	public UserService() {
 		users.add(alice);
-		users.add(bob);
 	}
 
 	@GetMapping("/api/user")
@@ -37,9 +35,9 @@ public class UserService {
 	}
 
 	@GetMapping("/api/user/{userId}")
-	public User findUserById(@PathVariable("userId") Integer id) {
+	public User findUserById(@PathVariable("userId") Long id) {
 		for (User user : users) {
-			if (id == user.getId().intValue())
+			if (id.equals(user.getId()))
 				return user;
 		}
 		return null;
@@ -47,13 +45,16 @@ public class UserService {
 
 	@PostMapping(path = "/api/user/createUser", consumes = "application/json", produces = "application/json")
 	public User createUser(@RequestBody User user) {
+		user.setId(new Date().getTime());
 		users.add(user);
 		return user;
 	}
 
 	@DeleteMapping(path = "/api/user/deleteUser")
 	@ResponseBody
-	public boolean deleteUser(@RequestParam("id") Integer id) {
+	public boolean deleteUser(@RequestParam("id") String strid) {		
+		System.out.println(strid);
+		Long id = Long.parseLong(strid);
 		for (User user : users) {
 			if (user.getId().equals(id)) {
 				users.remove(user);

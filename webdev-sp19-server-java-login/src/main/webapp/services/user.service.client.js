@@ -21,19 +21,21 @@ function AdminUserServiceClient() {
     function createUser(user, callback) {
         
         const promise = new Promise((resolve, reject) => {
-            var data = JSON.stringify({
-                "id": 123,
-                "username": "alice",
-                "password": null,
-                "firstName": "Alice",
-                "lastName": "Wonderland"
-              });
+							var data = JSON.stringify({
+				                "id": null,
+				                "username": user.username,
+				                "password": user.password,
+				                "firstName": user.firstName,
+								"lastName": user.lastName,
+								"role": user.role 
+							});
               
               var xhr = new XMLHttpRequest();
               xhr.withCredentials = true;
               
               xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
+                  console.log(this.responseText);	
                   resolve(JSON.parse(this.responseText));
                 }
               });
