@@ -48,15 +48,24 @@
         return userService.findAllUsers();
     }
     function findUserById() { 
-    	
+    	console.log($(this).attr('deleteID'));
     }
     function deleteUser() { 
-    	
-    }
+        var delButton = $(this);
+        var delRow = delButton.parent().parent();
+
+        userService.deleteUser($(this).attr('deleteID'))
+        .then(function(){
+            console.log("All good");
+            console.log(delRow);
+            delRow.remove();
+        });
+        
+    } 
     function selectUser() { 
     	
     }
-    function updateUser() {
+    function updateUser(id) {
     	
     }
     
@@ -75,6 +84,10 @@
             clone.show();
             clone.find(".username").html(users[u].username);
             clone.find(".firstName").html(users[u].firstName);
+            clone.find("#removeBtn").click(deleteUser);
+            clone.find("#removeBtn").attr("deleteID", users[u].id+"");
+            clone.find("#editBtn").click(updateUser);
+            clone.find("#editBtn").attr("editID", users[u].id+"");
             $tbody.append(clone);
         }
     }

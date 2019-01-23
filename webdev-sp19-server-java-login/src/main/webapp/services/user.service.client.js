@@ -136,11 +136,11 @@ function AdminUserServiceClient() {
 
     	xhr.addEventListener("readystatechange", function () {
     	  if (this.readyState === 4) {
-    	    console.log(this.responseText);
+    	    resolve(JSON.parse(this.responseText));
     	  }
     	});
 
-    	xhr.open("DELETE", "http://localhost:8080/api/user/deleteUser?id=123");
+    	xhr.open("DELETE", "http://localhost:8080/api/user/deleteUser?id="+userId);
     	xhr.setRequestHeader("Content-Type", "application/json");
     	xhr.setRequestHeader("cache-control", "no-cache");
     	xhr.setRequestHeader("Postman-Token", "84c27046-38f6-466d-9b6d-68348732c29d");

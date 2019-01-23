@@ -53,14 +53,14 @@ public class UserService {
 	
 	@DeleteMapping(path = "/api/user/deleteUser")
 	@ResponseBody
-	public void deleteUser(@RequestParam("id") Integer id) {
+	public boolean deleteUser(@RequestParam("id") Integer id) {
 		for(User user: users) {
 			if(user.getId().equals(id)) {
 				users.remove(user);
-				return;
+				return true;
 		 }
 		}
-		
+		return false;
 	}
 	
 	
