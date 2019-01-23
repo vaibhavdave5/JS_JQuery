@@ -3,11 +3,14 @@
  */
 
 function AdminUserServiceClient() {
+
+
     this.createUser = createUser;
     this.findAllUsers = findAllUsers;
     this.findUserById = findUserById;
     this.deleteUser = deleteUser;
     this.updateUser = updateUser;
+    this.searchUser = searchUser;
     this.url = 'http://localhost:8080/api/user';
     var self = this;
     
@@ -149,4 +152,34 @@ function AdminUserServiceClient() {
     });
     return promise;
     }
+
+    function searchUser(user, callback) {
+    	
+        const promise = new Promise((resolve, reject) => {
+		    var data = JSON.stringify({
+		    	  "id": 234,
+		    	  "username": "bob",
+		    	  "password": null,
+		    	  "firstName": null,
+		    	  "lastName": null
+		    	});
+		
+		    	var xhr = new XMLHttpRequest();
+		    	xhr.withCredentials = true;
+		
+		    	xhr.addEventListener("readystatechange", function () {
+		    	  if (this.readyState === 4) {
+		    		  resolve(JSON.parse(this.responseText));
+		    	  }
+		    	});
+		
+		    	xhr.open("POST", "http://localhost:8080/api/user/searchUser");
+		    	xhr.setRequestHeader("Content-Type", "application/json");
+		    	xhr.setRequestHeader("cache-control", "no-cache");
+		    	xhr.setRequestHeader("Postman-Token", "fa18de82-526a-4232-991c-01d665972057");
+		
+		    	xhr.send(data);
+		    });
+        return promise;
+      }
 }

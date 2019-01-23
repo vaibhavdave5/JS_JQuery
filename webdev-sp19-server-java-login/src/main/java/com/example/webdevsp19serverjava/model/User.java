@@ -43,4 +43,12 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	@Override
+	public String toString() {
+		return "fName "+ firstName + System.lineSeparator()+
+				"lName "+ lastName + System.lineSeparator()+
+				"uName "+ username + System.lineSeparator()+
+				"password "+ password + System.lineSeparator();
+	}
 }
