@@ -1,8 +1,8 @@
 (function(){
     
-
+    
     var $usernameFld, $passwordFld, $lastNameFld;
-    var $createBtn, $searchBtn;
+    var $createBtn, $searchBtn, $roleFld;
     var $firstNameFld;
     var $userRowTemplate, $tbody;
     var $editConfirmBtn, $cancelEditBtn;
@@ -11,25 +11,33 @@
     $(main);
 
     function main() {
+        
         $usernameFld = $("#usernameFld");
         $firstNameFld = $("#firstNameFld");
         $passwordFld = $("#passwordFld");
-        $lastNameFld = $("#lastNameFld")
+        $lastNameFld = $("#lastNameFld");
+        $roleFld = $("#roleFld");
+
+        
         $createBtn = $("#createBtn");
+        $createBtn.click(createUser);
+    
         $searchBtn = $("#searchBtn");
         $searchBtn.click(searchUser);
 
         $editing = false;
-        $createBtn.click(createUser);
+    
         $userRowTemplate = $(".wbdv-template");
+        $userRowTemplate.hide();
+
         $tbody = $("tbody");
+        
         $cancelEditBtn = $("#cancelEditBtn");
         $editConfirmBtn = $("#editConfirmBtn");
 
         $cancelEditBtn.hide();
         $editConfirmBtn.hide();
-        $userRowTemplate.hide();
-        
+
         userService
             .findAllUsers()
             .then(renderUsers);     
@@ -37,34 +45,47 @@
 
 
     function createUser() { 
-    	var user =
-    		{
-    			id: 123,
-    			username: $usernameFld, 
-    			password: $passwordFld,
-    			firstName: $firstNameFld,
-    			lastName: $lastNameFld
-    		}
-    	
-    	userService
-            .createUser(user)
-    		.then(renderUser);
+            
+            if(!$usernameFld || !$passwordFld || !$firstNameFld || !$lastNameFld){
+                alert("All fields must be filled");
+            }
+        
+            else{ 
+                var user =
+                {
+                    id: null,
+                    username: $usernameFld, 
+                    password: $passwordFld,
+                    firstName: $firstNameFld,
+                    lastName: $lastNameFld,
+                    role: $roleFld 
+                };
+
+                userService
+                    .createUser(user)
+                    .then(renderUser);
+        }
     }
 
     function findAllUsers() {
         return userService.findAllUsers();
     }
-    function findUserById() { 
-    	
+    function findUserById(id) {
+        return userService.findUserById(id);
     }
 
     function deleteUser() { 
         var delButton = $(this);
         var delRow = delButton.parent().parent().parent().parent();
-        userService.deleteUser(delButton.attr('deleteID'))
-        .then(function(){
-            delRow.remove();
-        });
+        
+        var r = confirm("Are you sure?");
+        if (r == true) {
+            userService.deleteUser(delButton.attr('deleteID'))
+            .then(function(){
+                delRow.remove();
+            });    
+        } 
+        
     }
 
     function selectUser() { 
