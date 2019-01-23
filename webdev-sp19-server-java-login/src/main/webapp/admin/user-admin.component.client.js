@@ -1,34 +1,36 @@
 (function(){
-    var $usernameFld, $passwordFld, $roleFld;
-    var $removeBtn, $editBtn, $createBtn;
-    var $firstNameFld, $lastNameFld;
+    var $usernameFld, $passwordFld, $lastNameFld;
+    var $createBtn, $searchBtn;
+    var $firstNameFld;
     var $userRowTemplate, $tbody;
+    var $editConfirmBtn, $cancelEditBtn;
     var userService = new AdminUserServiceClient();
-    var $hiddenRow;
     $(main);
 
     function main() {
         $usernameFld = $("#usernameFld");
         $firstNameFld = $("#firstNameFld");
         $passwordFld = $("#passwordFld");
-        $roleFld = $("#roleFld");
+        $lastNameFld = $("#lastNameFld")
         $createBtn = $("#createBtn");
-        $createBtn.click(createUser);
+        $searchBtn = $("#searchBtn");
 
+        $createBtn.click(createUser);
         $userRowTemplate = $(".wbdv-template");
         $tbody = $("tbody");
-        
+        $cancelEditBtn = $("#cancelEditBtn");
+        $editConfirmBtn = $("#editConfirmBtn");
+
+        $cancelEditBtn.hide();
+        $editConfirmBtn.hide();
+
         $userRowTemplate.hide();
-
-        $usernameFld.val("alice");
-
-        
         userService
             .findAllUsers()
-            .then(renderUsers);
-
-      
+            .then(renderUsers);     
     }
+
+
     function createUser() { 
     	var user =
     		{
@@ -50,31 +52,50 @@
     function findUserById() { 
     	console.log($(this).attr('deleteID'));
     }
+
     function deleteUser() { 
         var delButton = $(this);
-        var delRow = delButton.parent().parent();
-
-        userService.deleteUser($(this).attr('deleteID'))
+        var delRow = delButton.parent().parent().parent().parent();
+        userService.deleteUser(delButton.attr('deleteID'))
         .then(function(){
-            console.log("All good");
-            console.log(delRow);
             delRow.remove();
         });
-        
     } 
     function selectUser() { 
     	
     }
-    function updateUser(id) {
-    	
+    function updateUser() {
+    	var editButton = $(this);
+        var editRow = editButton.parent().parent().parent().parent();
+        var username = editRow.find(".username").html();
+        var firstname = editRow.find(".firstName").html();
+        var lastname = editRow.find(".lastName").html();
+        var password = editRow.find(".password").html();
+                
+        var userRowEdit = $(".wbdv-form");
+        userRowEdit.find("#usernameFld").val(username);
+        userRowEdit.find("#firstNameFld").val(firstname);
+        userRowEdit.find("#lastNameFld").val(lastname);
+        userRowEdit.find("#passwordFld").val(password);
+
+        $cancelEditBtn.show();
+        $editConfirmBtn.show();
+
+        $searchBtn.hide();
+        $createBtn.hide();
+
     }
     
     function renderUser(user) { 
         var clone = $userRowTemplate.clone();
+        clone.show();
         clone.find(".username").html(user.username);
         clone.find(".firstName").html(user.firstName);
+        clone.find("#removeBtn").click(deleteUser);
+        clone.find("#removeBtn").attr("deleteID", user.id+"");
+        clone.find("#editBtn").click(updateUser);
+        clone.find("#editBtn").attr("editID", user.id+"");
         $tbody.append(clone);
-
     }
     
     function renderUsers(users) {
