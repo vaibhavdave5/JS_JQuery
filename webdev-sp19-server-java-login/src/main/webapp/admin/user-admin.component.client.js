@@ -66,7 +66,8 @@
                 
                 userService
                     .createUser(user)
-                    .then(renderUser);
+                    .then(findAllUsers)
+                    .then(renderUsers);
         }
     }
 
@@ -138,17 +139,17 @@
         var lastname = editRow.find(".lastName").html();
         var password = editRow.find(".password").html();
         var role = editRow.find(".role").html();
-
+        var editID = editButton.attr("editID");        
 
         var userRowEdit = $(".wbdv-form");
         userRowEdit.find("#usernameFld").val(username);
         userRowEdit.find("#firstNameFld").val(firstname);
         userRowEdit.find("#lastNameFld").val(lastname);
         userRowEdit.find("#passwordFld").val(password);
-        userRowEdit.find("#role").val(role);
+        userRowEdit.find("#roleFld").val(role);
         editRow.attr("bgcolor", "#FF0000");
 
-        var user;
+ 
 
         $editing = true;
         $cancelEditBtn.show();  
@@ -158,10 +159,21 @@
 
         $editConfirmBtn.show();
         $editConfirmBtn.click(function(){
-            userService.updateUser(user)
+
+            var user =
+                {
+                    id: null,
+                    username: userRowEdit.find("#usernameFld").val(), 
+                    password: userRowEdit.find("#passwordFld").val(),
+                    firstName: userRowEdit.find("#firstNameFld").val(),
+                    lastName: userRowEdit.find("#lastNameFld").val(),
+                    role: userRowEdit.find("#roleFld").val() 
+                };
+
+            userService.updateUser(editID, user)
             .then(function(){
                 location.reload();
-            })
+            });
         });
 
             $searchBtn.hide();

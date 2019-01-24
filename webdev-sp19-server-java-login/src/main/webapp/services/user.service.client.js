@@ -82,7 +82,7 @@ function AdminUserServiceClient() {
       		  }
       		});
 
-      		xhr.open("GET", "http://localhost:8080/api/user/234");
+      		xhr.open("GET", "http://localhost:8080/api/user/"+userId);
       		xhr.setRequestHeader("Content-Type", "application/json");
       		xhr.setRequestHeader("cache-control", "no-cache");
       		xhr.setRequestHeader("Postman-Token", "d4cfa94a-6962-4c4c-a413-482821f4622b");
@@ -100,13 +100,14 @@ function AdminUserServiceClient() {
     function updateUser(userId, user, callback) {
     	
     	const promise = new Promise((resolve, reject) => {
-    	var data = JSON.stringify({
-    		  "id": 234,
-    		  "username": "bobi",
-    		  "password": null,
-    		  "firstName": "Bob",
-    		  "lastName": "Marley"
-    		});
+	    		var data = JSON.stringify({
+	                "id": userId,
+	                "username": user.username,
+	                "password": user.password,
+	                "firstName": user.firstName,
+					"lastName": user.lastName,
+					"role": user.role 
+				});
 
     		var xhr = new XMLHttpRequest();
     		xhr.withCredentials = true;
@@ -117,7 +118,7 @@ function AdminUserServiceClient() {
     		  }
     		});
 
-    		xhr.open("PUT", "http://localhost:8080/api/user/updateUser?id=234");
+    		xhr.open("PUT", "http://localhost:8080/api/user/updateUser?strid="+userId);
     		xhr.setRequestHeader("Content-Type", "application/json");
     		xhr.setRequestHeader("cache-control", "no-cache");
     		xhr.setRequestHeader("Postman-Token", "52eb2f5a-e5e2-4083-a253-b09fd34bf42a");

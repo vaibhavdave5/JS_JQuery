@@ -67,7 +67,6 @@ public class UserService {
 	@PostMapping(path = "/api/user/searchUser", consumes = "application/json", produces = "application/json")
 	public List<User> searchUsers(@RequestBody User searchUser) {
 		List<User> user = new ArrayList<>();
-		System.out.println(searchUser.toString());
 		for (User temp : users) {
 			if (searchUser.getFirstName() != null) {
 				if(!temp.getFirstName().equals(searchUser.getFirstName())) {
@@ -97,7 +96,8 @@ public class UserService {
 
 	@PutMapping(path = "/api/user/updateUser")
 	@ResponseBody
-	public User updateUser(@RequestParam Integer id, @RequestBody User user) {
+	public User updateUser(@RequestParam String strid, @RequestBody User user) {
+		Long id = Long.parseLong(strid);
 		for (int i = 0; i < users.size(); ++i) {
 			if (users.get(i).getId().equals(id)) {
 				users.remove(i);
