@@ -1,5 +1,6 @@
 /**
- * 
+ * This is a Javascript service for admin
+ * it serves as the middle layer between client JS and api	
  */
 
 function AdminUserServiceClient() {
@@ -16,7 +17,8 @@ function AdminUserServiceClient() {
     
     
     /**
-     * 
+     * Send request to api to create user
+     * returns a promise with a new user
      */
     function createUser(user, callback) {
         
@@ -35,12 +37,11 @@ function AdminUserServiceClient() {
               
               xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4) {
-                  console.log(this.responseText);	
                   resolve(JSON.parse(this.responseText));
                 }
               });
               
-              xhr.open("POST", "http://localhost:8080/api/user/createUser");
+              xhr.open("POST", this.url+"/createUser");
               xhr.setRequestHeader("Content-Type", "application/json");
               xhr.setRequestHeader("cache-control", "no-cache");
               xhr.setRequestHeader("Postman-Token", "caf1dc73-961c-4c79-ab84-5c206a2ab9db");
@@ -53,8 +54,9 @@ function AdminUserServiceClient() {
 
     }
     
-    /*
-     * 
+    /**
+     * Send request to api to find all user
+     * returns a promise with all users
      */
     
     function findAllUsers(callback) {
@@ -64,8 +66,9 @@ function AdminUserServiceClient() {
         });
     }
     
-    /*
-     * 
+    /**
+     * Send request to api to fetch a user with a ID
+     * returns a promise with a user
      */
     
     function findUserById(userId, callback) {
@@ -82,7 +85,7 @@ function AdminUserServiceClient() {
       		  }
       		});
 
-      		xhr.open("GET", "http://localhost:8080/api/user/"+userId);
+      		xhr.open("GET", this.url+"/"+userId);
       		xhr.setRequestHeader("Content-Type", "application/json");
       		xhr.setRequestHeader("cache-control", "no-cache");
       		xhr.setRequestHeader("Postman-Token", "d4cfa94a-6962-4c4c-a413-482821f4622b");
@@ -94,8 +97,9 @@ function AdminUserServiceClient() {
     	return promise;
     }
     
-    /*
-     * 
+    /**
+     * Send request to api to update user
+     * returns a promise with a new user
      */
     function updateUser(userId, user, callback) {
     	
@@ -118,7 +122,7 @@ function AdminUserServiceClient() {
     		  }
     		});
 
-    		xhr.open("PUT", "http://localhost:8080/api/user/updateUser?strid="+userId);
+    		xhr.open("PUT", this.url+"/updateUser?strid="+userId);
     		xhr.setRequestHeader("Content-Type", "application/json");
     		xhr.setRequestHeader("cache-control", "no-cache");
     		xhr.setRequestHeader("Postman-Token", "52eb2f5a-e5e2-4083-a253-b09fd34bf42a");
@@ -128,8 +132,9 @@ function AdminUserServiceClient() {
     	return promise;
     }
     
-    /*
-     * 
+    /**
+     * Send request to api to delete user corresponding to a ID
+     * returns a promise with a boolean
      */
     	
     function deleteUser(userId, callback) {
@@ -146,7 +151,7 @@ function AdminUserServiceClient() {
     	  }
     	});
 
-    	xhr.open("DELETE", "http://localhost:8080/api/user/deleteUser?id="+userId);
+    	xhr.open("DELETE", this.url+"/deleteUser?id="+userId);
     	xhr.setRequestHeader("Content-Type", "application/json");
     	xhr.setRequestHeader("cache-control", "no-cache");
     	xhr.setRequestHeader("Postman-Token", "84c27046-38f6-466d-9b6d-68348732c29d");
@@ -156,15 +161,21 @@ function AdminUserServiceClient() {
     return promise;
     }
 
+    /**
+     * Send request to api to search user based on criteria
+     * returns a promise with a users fitting the criteria
+     */
+    
     function searchUser(user, callback) {
     	
         const promise = new Promise((resolve, reject) => {
 		    var data = JSON.stringify({
-		    	  "id": 234,
-		    	  "username": "bob",
-		    	  "password": null,
-		    	  "firstName": null,
-		    	  "lastName": null
+		    	  "id": null,
+		    	  "username": user.username,
+		    	  "password": user.password,
+		    	  "firstName": user.firstName,
+						"lastName": user.lastName,
+						"role": user.role
 		    	});
 		
 		    	var xhr = new XMLHttpRequest();
@@ -176,7 +187,7 @@ function AdminUserServiceClient() {
 		    	  }
 		    	});
 		
-		    	xhr.open("POST", "http://localhost:8080/api/user/searchUser");
+		    	xhr.open("POST", this.url+"/searchUser");
 		    	xhr.setRequestHeader("Content-Type", "application/json");
 		    	xhr.setRequestHeader("cache-control", "no-cache");
 		    	xhr.setRequestHeader("Postman-Token", "fa18de82-526a-4232-991c-01d665972057");

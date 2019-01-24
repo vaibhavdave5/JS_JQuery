@@ -1,3 +1,4 @@
+
 (function(){
     
     
@@ -44,6 +45,10 @@
     }
 
 
+    /**
+     * This function handles creation of all users
+     */
+    
     function createUser() { 
             
             if(!$usernameFld.val() ||
@@ -71,13 +76,27 @@
         }
     }
 
+    /**
+     * Finds all users
+     */
+    
     function findAllUsers() {
         return userService.findAllUsers();
     }
+    
+    
+    /**
+     * Finds the user corresponding to the ID
+     */
+    
     function findUserById(id) {
         return userService.findUserById(id);
     }
 
+    
+    /**
+     * This function deletes the user
+     */
     function deleteUser() { 
         var delButton = $(this);
         var delRow = delButton.parent().parent().parent().parent();
@@ -93,22 +112,33 @@
     }
 
     function selectUser() { 
+    // No contract for this method is present in the question
+    
     }   
 
+    
+    /**
+     * This function handles the search operation of the users
+     */
+
+    
     function searchUser(){
         var userRowEdit = $(".wbdv-form");
         var ufld = userRowEdit.find("#usernameFld").val();
         var fnfld = userRowEdit.find("#firstNameFld").val();
         var lnfld = userRowEdit.find("#lastNameFld").val();
         var pfld = userRowEdit.find("#passwordFld").val();
+        var rfld = userRowEdit.find("#roleFld").val();
         var user = {
             id: null,
             username: ufld, 
-            password: fnfld,
-            firstName: lnfld,
-            lastName: pfld
+            password: pfld,
+            firstName: fnfld,
+            lastName: lnfld,
+            role: rfld
         };
-        
+        console.log(user);
+
         if(!ufld){
             user.username = null;
         }
@@ -126,6 +156,11 @@
         .then(renderUsers);
     }
 
+    /**
+     * This function updates the selected user
+     */
+
+    
     function updateUser() {
         if($editing === true){
             alert("Cannot edit two elements at one time \n Press Cancel button");
@@ -134,11 +169,11 @@
         else {
     	var editButton = $(this);
         var editRow = editButton.parent().parent().parent().parent();
-        var username = editRow.find(".username").html();
-        var firstname = editRow.find(".firstName").html();
-        var lastname = editRow.find(".lastName").html();
-        var password = editRow.find(".password").html();
-        var role = editRow.find(".role").html();
+        var username = editRow.find(".wbdv-username").html();
+        var firstname = editRow.find(".wbdv-first-name").html();
+        var lastname = editRow.find(".wbdv-last-name").html();
+        var password = editRow.find(".wbdv-password").html();
+        var role = editRow.find(".wbdv-role").html();
         var editID = editButton.attr("editID");        
 
         var userRowEdit = $(".wbdv-form");
@@ -181,39 +216,53 @@
         }
     }
     
+    /**
+     * This function to appends a single user to the list
+     */
+    
     function renderUser(user) { 
         var clone = $userRowTemplate.clone();
         clone.show();
-        clone.find(".username").html(user.username);
-        clone.find(".firstName").html(user.firstName);
-        clone.find("#removeBtn").click(deleteUser);
-        clone.find("#removeBtn").attr("deleteID", user.id+"");
-        clone.find("#editBtn").click(updateUser);
-        clone.find("#editBtn").attr("editID", user.id+"");
+        clone.find(".wbdv-username").html(user.username);
+        clone.find(".wbdv-first-name").html(user.firstName);
+        clone.find("#wbdv-remove").click(deleteUser);
+        clone.find("#wbdv-remove").attr("deleteID", user.id+"");
+        clone.find("#wbdv-edit").click(updateUser);
+        clone.find("#wbdv-edit").attr("editID", user.id+"");
         $tbody.append(clone);
     }
+    
+    
+    /**
+     * Helper function to update the list of Users
+     */
     
     function hideAllRows() {
         $userRowTemplate.parent().children().css("display","none");
         $(".wbdv-form").show();
     }
 
+    
+    /**
+     * This function displays all the user on the roaster
+     */
+    
     function renderUsers(users) {
         hideAllRows();
         for(var u=0; u<users.length; u++) {
             var clone = $userRowTemplate.clone();
             clone.show();
             
-            clone.find(".username").html(users[u].username);
-            clone.find(".firstName").html(users[u].firstName);
-            clone.find(".lastName").html(users[u].lastName);
-            clone.find(".password").html('********');
-            clone.find(".date").html(new Date(users[u].id).toLocaleDateString());
-            clone.find(".role").html(users[u].role);
-            clone.find("#removeBtn").click(deleteUser);
-            clone.find("#removeBtn").attr("deleteID", users[u].id+"");
-            clone.find("#editBtn").click(updateUser);
-            clone.find("#editBtn").attr("editID", users[u].id+"");
+            clone.find(".wbdv-username").html(users[u].username);
+            clone.find(".wbdv-first-name").html(users[u].firstName);
+            clone.find(".wbdv-last-name").html(users[u].lastName);
+            clone.find(".wbdv-password").html('********');
+            clone.find(".wbdv-date").html(new Date(users[u].id).toLocaleDateString());
+            clone.find(".wbdv-role").html(users[u].role);
+            clone.find("#wbdv-remove").click(deleteUser);
+            clone.find("#wbdv-remove").attr("deleteID", users[u].id+"");
+            clone.find("#wbdv-edit").click(updateUser);
+            clone.find("#wbdv-edit").attr("editID", users[u].id+"");
             $tbody.append(clone);
         }
     }

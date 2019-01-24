@@ -1,7 +1,11 @@
 package com.example.webdevsp19serverjava.model;
 
-import java.util.Date;
-
+/**
+ * This object represents an abstract representation of User Object
+ *  
+ * @author Vaibhav
+ *
+ */
 public class User {
 	private Long id;
 	private String username;
@@ -11,6 +15,7 @@ public class User {
 	private String role;
 	
 	public User() {}
+	
 	public User(Long id, 
 				String username,
 				String firstName, 
@@ -22,6 +27,7 @@ public class User {
 		this.lastName = lastName;
 		this.role = role;
 	}
+	
 	public String getRole() {
 		return role;
 	}
@@ -65,5 +71,24 @@ public class User {
 				"lName "+ lastName + System.lineSeparator()+
 				"uName "+ username + System.lineSeparator()+
 				"password "+ password + System.lineSeparator();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) {
+			return false;
+		}
+		
+		if (!(obj instanceof User)) {
+			return false;
+		}
+		
+		User u = (User)obj;
+		
+		return (this.firstName.equals(u.firstName)
+				&&this.lastName.equals(u.lastName)
+				&&this.username.equals(u.username)
+				&&this.role.equals(u.role)
+				);
 	}
 }
